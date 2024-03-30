@@ -33,5 +33,5 @@ df_knn = pd.DataFrame(df_knn, columns=columns)
 print(df_knn[df_knn["province_Ontario"] == 1].corr(numeric_only=True)["price"].sort_values(ascending=False))
 
 df["size_interior"] = df_knn["size_interior"]
-df.to_csv("data/knn/data_knn_2024-03-25.csv")
+df.to_csv("data/knn/data_knn_2024-03-25.csv", index=False)
 
