@@ -6,6 +6,9 @@ df = pd.read_csv("data/aug/data_aug_2024-03-25.csv")
 # df = pd.read_csv("data/data_cleaned_ph2.csv")
 # df = pd.read_csv("data/data_cleaned_ph1_4.csv")
 
+df["size_interior"] = df["size_interior"].abs()
+
+
 df_knn = df[['bathrooms_total', 'bedrooms_extra', 'bedrooms',
             'stories_total', 'size_interior', 'building_type',
             'property_type', 'lng', 'lat',
@@ -13,6 +16,8 @@ df_knn = df[['bathrooms_total', 'bedrooms_extra', 'bedrooms',
             'province', 'price']]
 
 # df_knn = df[df["province"]=="Ontario"].drop(["agency_name", "agency_type", "property_type", "ownership_type", "land_size", "page_url", "timestamp", "postal_code"], axis=1)
+
+# For some reason, some houses have negative size
 
 # set houses with size of 0 or 1 to NaN
 df_knn["size_interior"] = df_knn["size_interior"].replace([0,1], np.NaN)
@@ -25,7 +30,7 @@ imputer = KNNImputer(n_neighbors=5)
 df_knn = imputer.fit_transform(df_knn)
 df_knn = pd.DataFrame(df_knn, columns=columns)
 
-print(df_knn.corr(numeric_only=True)["price"].sort_values(ascending=False))
+print(df_knn[df_knn["province_Ontario"] == 1].corr(numeric_only=True)["price"].sort_values(ascending=False))
 
 df["size_interior"] = df_knn["size_interior"]
 df.to_csv("data/knn/data_knn_2024-03-25.csv")
