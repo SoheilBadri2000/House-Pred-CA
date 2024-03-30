@@ -77,11 +77,14 @@ for id, lng, lat in coords:
             print("nothing found")
             with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'a') as f:
                 writer_obj = csv.writer(f)
-                writer_obj.writerow([id, (""*39)])
+                writer_obj.writerow([int(id), ""])
    
     except Exception as exception:
         print("An exception occurred")
         print(exception)
+        with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'a') as f:
+            writer_obj = csv.writer(f)
+            writer_obj.writerow([int(id), ""])
         # rand = randint(150, 300)
         # print(f"Safety sleep for {rand} secs...")
         # sleep(rand)
