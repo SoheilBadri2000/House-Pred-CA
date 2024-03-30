@@ -1,0 +1,81 @@
+{
+    "data": {
+        "type": "scores",
+        "location": {
+            "high_schools": {
+                "value": "4.0",
+                "text": "At least one high school within a 20-minute walk"
+            },
+            "primary_schools": {
+                "value": "4.0",
+                "text": "At least one elementary school within a 10-minute walk"
+            },
+            "transit_friendly": {
+                "value": "5.0",
+                "text": "Near a subway and frequent bus lines"
+            },
+            "groceries": {
+                "value": "5.0",
+                "text": "Several grocery stores nearby"
+            },
+            "wellness": {
+                "value": "4.0",
+                "text": "A variety of amenities within a few minutes' walk that cater to physical activity and healthy eating"
+            },
+            "restaurants": {
+                "value": "4.5",
+                "text": "Variety of restaurants within a few minutes' walk"
+            },
+            "pedestrian_friendly": {
+                "value": "3.5",
+                "text": "Some day-to-day needs are within walking distance"
+            },
+            "greenery": {
+                "value": "1.0",
+                "text": "Very few street trees or parks in the area"
+            },
+            "cycling_friendly": {
+                "value": "4.0",
+                "text": "Suitable for bicycle commuting and/or recreational cycling"
+            },
+            "car_friendly": {
+                "value": "3.0",
+                "text": "Arteries nearby, but traffic congestion and parking problems are possible"
+            },
+            "vibrant": {
+                "value": "4.5",
+                "text": "Vibrant atmosphere all day and into the evening"
+            },
+            "shopping": {
+                "value": "5.0",
+                "text": "Wide variety of shops within a few minutes' walk"
+            },
+            "daycares": {
+                "value": "5.0",
+                "text": "At least one daycare within a 5-minute walk"
+            },
+            "nightlife": {
+                "value": "4.0",
+                "text": "Variety of bars within a few minutes' walk"
+            },
+            "cafes": {
+                "value": "5.0",
+                "text": "Variety of caf\u00e9s right on the street"
+            },
+            "quiet": {
+                "value": "0.0",
+                "text": "Many sources of noise nearby"
+            },
+            "parks": {
+                "value": "5.0",
+                "text": "Very large amount of park space within a few minutes' walk"
+            }
+        },
+        "geographies": []
+    },
+    "meta": {
+        "message": "Successfully called v3/scores API.",
+        "type": "LocalLogic.API.Success",
+        "statusCode": 200
+    }
+}
