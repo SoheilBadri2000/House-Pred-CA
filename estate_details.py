@@ -11,7 +11,7 @@ import pandas as pd
 #     'https://realtor.ca/real-estate/26398326/955-ouellette-avenue-unit-102-windsor'
 # ]
 
-df = pd.read_csv("data/aug/data_aug_2024-03-25.csv")
+df = pd.read_csv("data/aug/data-aug-2024-04-01.csv")
 urls = df[df["size_interior"].isna()]["page_url"]
 
 
@@ -20,18 +20,19 @@ def dim_to_sqft(area_list):
   full_dims = 0
   empty_dims = 0
 
+
   for dims in area_list:
-    if dims:
+    if dims and len(dims) <=2 :
       full_dims += 1
       sub_area = 1
       for dim in dims:
-        sub_area *= float(dim)
+        sub_area *= abs(float(dim))
       area += sub_area
     else:
       empty_dims += 1
 
   if full_dims / (empty_dims+full_dims) > 0.3:
-    area = area + (empty_dims * (area/full_dims))*0.6
+    area = area + (empty_dims * (area/full_dims))*0.5
     return area * 10.764
   else:
     return 1
@@ -104,7 +105,7 @@ while len(urls) != 0:
                 df.loc[df["page_url"] == url, "size_interior"] = 1
 
     print(f"scraped 150 records, {len(urls)} URLs remain")
-    df.to_csv("data/aug/data_aug_2024-03-25.csv", index=False)
+    df.to_csv("data/aug/data-aug-2024-04-01.csv", index=False)
     urls = urls[150:]
 
 
