@@ -28,7 +28,7 @@ def write_to_csv(id, data):
     loc_quiet = data["quiet"]["value"] if "quiet" in data else "0.0"
     loc_parks = data["parks"]["value"] if "parks" in data else "0.0"
 
-    with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'a') as f:
+    with open (r"data/LocalLogic/Locations/locations-2024-04-01.csv", 'a') as f:
         writer_obj = csv.writer(f)
         writer_obj.writerow([int(id), loc_high_schools, loc_primary_schools, loc_transit_friendly, loc_groceries,
                              loc_wellness, loc_restaurants, loc_pedestrian_friendly, loc_greenery, loc_cycling_friendly,
@@ -37,7 +37,7 @@ def write_to_csv(id, data):
 
 
 
-with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'w') as f:
+with open (r"data/LocalLogic/Locations/locations-2024-04-01.csv", 'w') as f:
     writer_obj = csv.writer(f)
     writer_obj.writerow(["id", "loc_high_schools", "loc_primary_schools", "loc_transit_friendly", "loc_groceries",
                              "loc_wellness", "loc_restaurants", "loc_pedestrian_friendly", "loc_greenery", "loc_cycling_friendly",
@@ -75,14 +75,14 @@ for id, lng, lat in coords:
             write_to_csv(id, data)
         else:
             print("nothing found")
-            with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'a') as f:
+            with open (r"data/LocalLogic/Locations/locations-2024-04-01.csv", 'a') as f:
                 writer_obj = csv.writer(f)
                 writer_obj.writerow([int(id), ""])
    
     except Exception as exception:
         print("An exception occurred")
         print(exception)
-        with open (r"data/LocalLogic/Locations/locations_for_2024-03-25.csv", 'a') as f:
+        with open (r"data/LocalLogic/Locations/locations-2024-04-01.csv", 'a') as f:
             writer_obj = csv.writer(f)
             writer_obj.writerow([int(id), ""])
         # rand = randint(150, 300)
