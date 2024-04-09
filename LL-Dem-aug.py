@@ -6,8 +6,8 @@ import requests
 import csv
 
 
-df_house = pd.read_csv("data/lof/data-lof-2024-04-01.csv")
-df_dem = pd.read_csv("data/LocalLogic/Demographics/demographics-2024-04-01.csv")
+df_house = pd.read_csv("data/lof/data-lof-2024-04-07.csv")
+df_dem = pd.read_csv("data/LocalLogic/Demographics/demographics-2024-04-07.csv")
 
 outstanding_ids = list(set(df_house["id"]) - set(df_dem["id"]))
 
@@ -67,7 +67,7 @@ def write_to_csv(id, data):
     area_apt_1_to_4_floors = data["housing_type"]["variables"][4]["value"]
     area_apt_5_plus_floors = data["housing_type"]["variables"][5]["value"]
 
-    with open (r"data/LocalLogic/Demographics/demographics-2024-04-01.csv", 'a') as f:
+    with open (r"data/LocalLogic/Demographics/demographics-2024-04-07.csv", 'a') as f:
         writer_obj = csv.writer(f)
         writer_obj.writerow([int(id), household_income, individual_income, commute_transit, commute_foot, commute_bicycle,
                             commute_drive, single_family, multi_family, single_person, multi_person, total_individuals,
@@ -111,14 +111,14 @@ for id, lng, lat in coords:
             write_to_csv(id, data)
         else:
             print("nothing found")
-            with open (r"data/LocalLogic/Demographics/demographics-2024-04-01.csv", 'a') as f:
+            with open (r"data/LocalLogic/Demographics/demographics-2024-04-07.csv", 'a') as f:
                 writer_obj = csv.writer(f)
                 writer_obj.writerow([int(id), ""])
    
     except Exception as exception:
         print("An exception occurred")
         print(exception)
-        with open (r"data/LocalLogic/Demographics/demographics-2024-04-01.csv", 'a') as f:
+        with open (r"data/LocalLogic/Demographics/demographics-2024-04-07.csv", 'a') as f:
             writer_obj = csv.writer(f)
             writer_obj.writerow([int(id), ""])
         # rand = randint(150, 300)
