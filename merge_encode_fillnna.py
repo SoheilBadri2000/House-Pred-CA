@@ -88,7 +88,5 @@ columns = df_enc.columns
 df_enc = imputer.fit_transform(df_enc)
 df_enc = pd.DataFrame(df_enc, columns=columns)
 
-df_enc["id"] = df_enc["id"].astype(int)
-
 
 df_enc.to_csv("data/enc/data-enc-2024-04-07.csv", index=False)
