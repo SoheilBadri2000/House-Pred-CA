@@ -11,7 +11,7 @@ import pandas as pd
 #     'https://realtor.ca/real-estate/26398326/955-ouellette-avenue-unit-102-windsor'
 # ]
 
-df = pd.read_csv("data/aug/data-aug-2024-04-07.csv")
+df = pd.read_csv("data/aug/data-aug-2024-04-15.csv")
 urls = df[df["size_interior"].isna()]["page_url"]
 
 
@@ -79,8 +79,8 @@ while len(urls) != 0:
                   html = page.inner_html("body")
                   tree = HTMLParser(html)
 
-                  if page.query_selector("div[id='propertyDetailsSectionVal_TotalFinishedArea'] > div[class*='propertyDetailsSectionContentValue']"):
-                    div = tree.css_first("div[id='propertyDetailsSectionVal_TotalFinishedArea'] > div[class*='propertyDetailsSectionContentValue']")
+                  if page.query_selector("div[id='propertyDetailsMeasurementsSectionVal_4_1'] > div[class*='propertyDetailsSectionContentValue']"):
+                    div = tree.css_first("div[id='propertyDetailsMeasurementsSectionVal_4_1'] > div[class*='propertyDetailsSectionContentValue']")
                     pattern = r"[-+]?(?:\d*\.*\d+)"
                     area = re.findall(pattern, div.text())[0]
                     print(area)
@@ -105,7 +105,7 @@ while len(urls) != 0:
                 df.loc[df["page_url"] == url, "size_interior"] = 1
 
     print(f"scraped 150 records, {len(urls)} URLs remain")
-    df.to_csv("data/aug/data-aug-2024-04-07.csv", index=False)
+    df.to_csv("data/aug/data-aug-2024-04-15.csv", index=False)
     urls = urls[150:]
 
 
