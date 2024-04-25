@@ -31,7 +31,7 @@ df.insert(2, "avg_price_5", avg_price_5)
 
 
 # USE THE FOLLOWING FUNCTION FOR TEST DATA
-def calculate_average_neighbor_price(df, lng, lat, k=5):
+def calculate_average_neighbor_price(lng, lat, df=df, k=5):
     """
     Calculate the average price of the k nearest neighboring houses based on lng and lat.
 
@@ -46,9 +46,11 @@ def calculate_average_neighbor_price(df, lng, lat, k=5):
     """
     # Create a BallTree for nearest neighbor search based on lng and lat
     tree = BallTree(df[['lng', 'lat']].values, leaf_size=15)
+    print("tree made")
 
     # Find the indices of the k nearest neighbors (including the sample itself)
     dist, ind = tree.query([[lng, lat]], k=k)
+    print("ind made")
 
     # Extract indices of the neighbors
     neighbors = ind.flatten()
@@ -72,21 +74,21 @@ def calculate_average_neighbor_price(df, lng, lat, k=5):
 
 
 
+if __name__ == "__main__":
+
+    df = pd.merge(df, df_dem, on="id")
+    df = pd.merge(df, df_loc, on="id")
+
+    df = df.drop(["id", "id_mls", "agency_name", "agency_type", "property_type", "ownership_type", "land_size", "page_url", "timestamp", "postal_code"], axis=1)
+
+    df["ownership_type_group_ids"] = df["ownership_type_group_ids"].astype("object")
+
+    df_enc = pd.get_dummies(df)
+
+    imputer = KNNImputer(n_neighbors=5)
+    columns = df_enc.columns
+    df_enc = imputer.fit_transform(df_enc)
+    df_enc = pd.DataFrame(df_enc, columns=columns)
 
 
-df = pd.merge(df, df_dem, on="id")
-df = pd.merge(df, df_loc, on="id")
-
-df = df.drop(["id", "id_mls", "agency_name", "agency_type", "property_type", "ownership_type", "land_size", "page_url", "timestamp", "postal_code"], axis=1)
-
-df["ownership_type_group_ids"] = df["ownership_type_group_ids"].astype("object")
-
-df_enc = pd.get_dummies(df)
-
-imputer = KNNImputer(n_neighbors=5)
-columns = df_enc.columns
-df_enc = imputer.fit_transform(df_enc)
-df_enc = pd.DataFrame(df_enc, columns=columns)
-
-
-df_enc.to_csv("data/enc/data-enc-2024-04-15.csv", index=False)
+    df_enc.to_csv("data/enc/data-enc-2024-04-15.csv", index=False)
