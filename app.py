@@ -1,13 +1,28 @@
 import requests
-# from merge_encode_fillnna import calculate_average_neighbor_price
-from BallTree import calculate_average_neighbor_price
+import pandas as pd
+from pickle_loader import calculate_average_neighbor_price, eval_ON
 
 
+lng = -79.7953955
+lat = 43.2172796
+
+bathrooms_total = 2
+bedrooms = 2
+bedrooms_extra = 0
+stories_total = 1
+size_interior = 1000
+parkings = 1
+
+building_type_Apartment = 1
+building_type_House = 0
+building_type_Row_Townhouse = 0
+building_type_Semi_Detached = 0
+
+ownership_type_group_ids_0 = 0
+ownership_type_group_ids_1 = 0
+ownership_type_group_ids_2 = 1
 
 
-
-lng = -79.378075
-lat = 43.644229
 
 url_dem =  f'https://api.locallogic.co/v3/demographics?lng={lng}&lat={lat}&lang=en'
 url_loc = f'https://api.locallogic.co/v3/scores?lng={lng}&lat={lat}'
@@ -107,5 +122,57 @@ loc_quiet = data_loc["quiet"]["value"] if "quiet" in data_loc else "0.0"
 loc_parks = data_loc["parks"]["value"] if "parks" in data_loc else "0.0"
 
 
-print(avg_price_5, household_income, loc_high_schools)
 
+X_test = pd.DataFrame(
+    [[avg_price_5, bathrooms_total, bedrooms_extra, bedrooms,
+    stories_total, size_interior, lng, lat, parkings,
+    household_income, individual_income, commute_transit,
+    commute_foot, commute_bicycle, commute_drive, single_family,
+    multi_family, single_person, multi_person, total_individuals,
+    age_0_to_4, age_5_to_9, age_10_to_14, age_15_to_19,
+    age_20_to_34, age_35_to_49, age_50_to_64, age_65_to_79,
+    age_80_plus, owners, renters, lang_en_only, lang_fr_only,
+    lang_en_and_fr, lang_other, edu_no_high_school, edu_high_school,
+    edu_trade_certificate, edu_college_certificate,
+    edu_university_certificate, edu_bachelor_degree,
+    edu_post_graduate_degree, household_children,
+    area_single_detached, area_semi_detached, area_duplex,
+    area_row_houses, area_apt_1_to_4_floors, area_apt_5_plus_floors,
+    loc_high_schools, loc_primary_schools, loc_transit_friendly,
+    loc_groceries, loc_wellness, loc_restaurants,
+    loc_pedestrian_friendly, loc_greenery, loc_cycling_friendly,
+    loc_car_friendly, loc_vibrant, loc_shopping, loc_daycares,
+    loc_nightlife, loc_cafes, loc_quiet, loc_parks,
+    building_type_Apartment, building_type_House,
+    building_type_Row_Townhouse, building_type_Semi_Detached,
+    ownership_type_group_ids_0, ownership_type_group_ids_1,
+    ownership_type_group_ids_2]],
+
+    columns= ['avg_price_5', 'bathrooms_total', 'bedrooms_extra', 'bedrooms',
+       'stories_total', 'size_interior', 'lng', 'lat', 'parkings',
+       'household_income', 'individual_income', 'commute_transit',
+       'commute_foot', 'commute_bicycle', 'commute_drive', 'single_family',
+       'multi_family', 'single_person', 'multi_person', 'total_individuals',
+       'age_0_to_4', 'age_5_to_9', 'age_10_to_14', 'age_15_to_19',
+       'age_20_to_34', 'age_35_to_49', 'age_50_to_64', 'age_65_to_79',
+       'age_80_plus', 'owners', 'renters', 'lang_en_only', 'lang_fr_only',
+       'lang_en_and_fr', 'lang_other', 'edu_no_high_school', 'edu_high_school',
+       'edu_trade_certificate', 'edu_college_certificate',
+       'edu_university_certificate', 'edu_bachelor_degree',
+       'edu_post_graduate_degree', 'household_children',
+       'area_single_detached', 'area_semi_detached', 'area_duplex',
+       'area_row_houses', 'area_apt_1_to_4_floors', 'area_apt_5_plus_floors',
+       'loc_high_schools', 'loc_primary_schools', 'loc_transit_friendly',
+       'loc_groceries', 'loc_wellness', 'loc_restaurants',
+       'loc_pedestrian_friendly', 'loc_greenery', 'loc_cycling_friendly',
+       'loc_car_friendly', 'loc_vibrant', 'loc_shopping', 'loc_daycares',
+       'loc_nightlife', 'loc_cafes', 'loc_quiet', 'loc_parks',
+       'building_type_Apartment', 'building_type_House',
+       'building_type_Row / Townhouse', 'building_type_Semi-Detached',
+       'ownership_type_group_ids_0.0', 'ownership_type_group_ids_1.0',
+       'ownership_type_group_ids_2.0']
+)
+
+
+pred = eval_ON(X_test)
+print(pred)
