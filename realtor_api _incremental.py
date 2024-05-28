@@ -26,7 +26,7 @@ headers = {
     "TE": "trailers"
 }
 
-with open (r"data/inc/data-inc-2024-05-21.csv", 'w') as f:
+with open (r"data/inc/data-inc-2024-05-27.csv", 'w') as f:
     writer_obj = csv.writer(f)
     writer_obj.writerow(["id", "id_mls", "bathrooms_total", "bedrooms", "stories_total","size_interior", "building_type",
                         "agency_name", "agency_type", "property_type", "lng", "lat", "ownership_type", "ownership_type_group_ids", "land_size",
@@ -57,14 +57,14 @@ def write_to_csv(result):
         province = result["ProvinceName"]
         price = result["Property"]["PriceUnformattedValue"]
         
-        with open (r"data/inc/data-inc-2024-05-21.csv", 'a') as f:
+        with open (r"data/inc/data-inc-2024-05-27.csv", 'a') as f:
             writer_obj = csv.writer(f)
             writer_obj.writerow([id, id_mls, bathrooms_total, bedrooms, stories_total, size_interior, building_type,
                                 agency_name, agency_type, property_type, lng, lat, ownership_type, ownership_type_group_ids, land_size,
                                 parkings, page_url, timestamp, postal_code, province, price])
 
 
-day_num = 9
+day_num = 8
 
 lat_min = 42
 lat_max = 83
