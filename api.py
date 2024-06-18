@@ -9,7 +9,7 @@ CORS(app)
 def post_CA():
     data = request.get_json()
     print(f"\n\nReceived data:\n {data}\n\n")
-    print(pd.json_normalize(data))
+    print(pd.json_normalize(data).info())
     # Process the data and return a response if needed
     return "1000000"
     # return jsonify(data)
