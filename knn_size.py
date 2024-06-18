@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.impute import KNNImputer
 
-df = pd.read_csv("data/aug/data-aug-2024-06-10.csv")
+df = pd.read_csv("data/aug/data-aug-2024-06-17.csv")
 # df = pd.read_csv("data/data_cleaned_ph2.csv")
 # df = pd.read_csv("data/data_cleaned_ph1_4.csv")
 
@@ -33,5 +33,5 @@ df_knn = pd.DataFrame(df_knn, columns=columns)
 print(df_knn[df_knn["province_Ontario"] == 1].corr(numeric_only=True)["price"].sort_values(ascending=False))
 
 df["size_interior"] = df_knn["size_interior"]
-df.to_csv("data/knn/data-knn-2024-06-10.csv", index=False)
+df.to_csv("data/knn/data-knn-2024-06-17.csv", index=False)
 
