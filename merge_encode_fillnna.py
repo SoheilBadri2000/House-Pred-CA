@@ -2,9 +2,9 @@ import pandas as pd
 from sklearn.impute import KNNImputer
 from sklearn.neighbors import BallTree
 
-df = pd.read_csv("data/lof/data-lof-2024-05-27.csv")
-df_dem = pd.read_csv("data/LocalLogic/Demographics/demographics-2024-05-27.csv")
-df_loc = pd.read_csv("data/LocalLogic/Locations/locations-2024-05-27.csv")
+df = pd.read_csv("data/lof/data-lof-2024-06-17.csv")
+df_dem = pd.read_csv("data/LocalLogic/Demographics/demographics-2024-06-17.csv")
+df_loc = pd.read_csv("data/LocalLogic/Locations/locations-2024-06-17.csv")
 
 
 df_geo_price = df[["lng", "lat", "price"]]
@@ -92,4 +92,4 @@ if __name__ == "__main__":
     df_enc = pd.DataFrame(df_enc, columns=columns)
 
 
-    df_enc.to_csv("data/enc/data-enc-2024-05-27.csv", index=False)
+    df_enc.to_csv("data/enc/data-enc-2024-06-17.csv", index=False)
