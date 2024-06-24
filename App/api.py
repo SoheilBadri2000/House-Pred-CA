@@ -15,6 +15,6 @@ def post_CA():
     res = int(process_ON(data))
     print(f"\n\n{res}\n\n")
     return str(res)
-
+ 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
