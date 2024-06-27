@@ -79,6 +79,7 @@ for latitude in range(lat_min, lat_max):
         for page_num in range(1,51):
                 
             try:
+                print(safety_count)
                 safety_count += 1
                 payload = f"LatitudeMax={latitude+1}&LongitudeMax={longitude+1}&LatitudeMin={latitude}&LongitudeMin={longitude}&CurrentPage={page_num}&Sort=6-D&PropertyTypeGroupID=1&TransactionTypeId=2&PropertySearchTypeId=0&NumberOfDays={day_num}&Currency=CAD&RecordsPerPage=200&ApplicationId=1&CultureId=1&Version=7.0"
                 response = requests.request("POST", url, data=payload, headers=headers)
