@@ -3,8 +3,8 @@ from sklearn.neighbors import BallTree
 import pickle
 from catboost import CatBoostRegressor
 
-df = pd.read_csv("data/lof/data-lof-2024-06-17.csv")
-df_enc = pd.read_csv("data/enc/data-enc-2024-06-17.csv")
+df = pd.read_csv("data/lof/data-lof-2024-06-24.csv")
+df_enc = pd.read_csv("data/enc/data-enc-2024-06-24.csv")
 
 df_ON = df_enc[df_enc["province_Ontario"] == True]
 df_QC = df_enc[df_enc["province_Quebec"] == True]
@@ -78,11 +78,11 @@ def create_ball_tree(df):
 
 # Create and pickle the BallTree
 tree = create_ball_tree(df)
-with open('App/pickles/2024-06-17/AvgPrice-2024-06-17.pkl', 'wb') as f:
+with open('App/pickles/2024-06-24/AvgPrice-2024-06-24.pkl', 'wb') as f:
     pickle.dump(tree, f)
 
 # Pickle the price dataset
-with open('App/pickles/2024-06-17/Price-2024-06-17.pkl', 'wb') as f:
+with open('App/pickles/2024-06-24/Price-2024-06-24.pkl', 'wb') as f:
     pickle.dump(df[['lng', 'lat', 'price']], f)
 
 # X = df_ON.drop("price", axis=1)
@@ -90,7 +90,7 @@ with open('App/pickles/2024-06-17/Price-2024-06-17.pkl', 'wb') as f:
 # cbr = CatBoostRegressor(silent=True)
 # cbr.fit(X, y)
 
-# with open('pickles/2024-06-17/cbr-ON-2024-06-17.pkl', 'wb') as f:
+# with open('pickles/2024-06-24/cbr-ON-2024-06-24.pkl', 'wb') as f:
 #     pickle.dump(cbr, f)
 
 dfs = [
@@ -115,5 +115,5 @@ for [df, df_name] in dfs:
     cbr = CatBoostRegressor(silent=True)
     cbr.fit(X, y)
 
-    with open(f'App/pickles/2024-06-17/cbr-{df_name}-2024-06-17.pkl', 'wb') as f:
+    with open(f'App/pickles/2024-06-24/cbr-{df_name}-2024-06-24.pkl', 'wb') as f:
         pickle.dump(cbr, f)
