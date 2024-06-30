@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.impute import KNNImputer
 from sklearn.neighbors import BallTree
 import pickle
 from catboost import CatBoostRegressor
@@ -114,6 +115,12 @@ for [df, df_name] in dfs:
     y = df["price"].values.flatten()
     cbr = CatBoostRegressor(silent=True)
     cbr.fit(X, y)
+    knn = KNNImputer(n_neighbors=5)
+    knn.fit(X)
 
     with open(f'App/pickles/2024-06-24/cbr-{df_name}-2024-06-24.pkl', 'wb') as f:
         pickle.dump(cbr, f)
+    with open(f'App/pickles/2024-06-24/knn-{df_name}-2024-06-24.pkl', 'wb') as f:
+        pickle.dump(knn, f)
+
+
